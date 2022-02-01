@@ -1,18 +1,20 @@
 from pprint import pprint
+import os
+from dotenv import load_dotenv
 import urllib.request
 import urllib.parse
 import json
 import pprint
 
-API_KEY_RIOT = "?api_key=RGAPI-d1b5008c-c3b6-46b4-b553-afe2486673c1"
-
+load_dotenv()
+key = "?api_key=" + str(os.getenv("RIOT_API_KEY"))
 base_request = "https://br1.api.riotgames.com"
 
 def IDbySummoner(Summoner):
 
     Summoner = urllib.parse.quote(Summoner)
 
-    final_resquest = base_request+"/lol/summoner/v4/summoners/by-name/"+Summoner+API_KEY_RIOT
+    final_resquest = base_request+"/lol/summoner/v4/summoners/by-name/"+Summoner+key
     JsonObj = urllib.request.urlopen(final_resquest)
     data = json.load(JsonObj)
     
@@ -20,7 +22,7 @@ def IDbySummoner(Summoner):
 
 def PuuIDbyEsID(esID):
 
-    endPoint = base_request+"/lol/summoner/v4/summoners/"+esID+API_KEY_RIOT
+    endPoint = base_request+"/lol/summoner/v4/summoners/"+esID+key
     JsonObj = urllib.request.urlopen(endPoint)
     data = json.load(JsonObj)
 
@@ -28,39 +30,39 @@ def PuuIDbyEsID(esID):
 
 def JsonSummonerByID(esID):
 
-    endPoint = base_request+'/lol/summoner/v4/summoners/'+esID+API_KEY_RIOT
+    endPoint = base_request+'/lol/summoner/v4/summoners/'+esID+key
     jsonObj = urllib.request.urlopen(endPoint)
     return json.load(jsonObj)
 
 def JsonEloByID(esID):
 
-    endPoint = base_request+'/lol/league/v4/entries/by-summoner/'+esID+API_KEY_RIOT
+    endPoint = base_request+'/lol/league/v4/entries/by-summoner/'+esID+key
     jsonObj = urllib.request.urlopen(endPoint)
     return json.load(jsonObj)
 
 def JsonHistoricoByPuuID(puuID):
     
     Ebase_request = "https://americas.api.riotgames.com"
-    endPoint = Ebase_request+"/lol/match/v5/matches/by-puuid/"+puuID+"/ids"+API_KEY_RIOT
+    endPoint = Ebase_request+"/lol/match/v5/matches/by-puuid/"+puuID+"/ids"+key
     jsonObj = urllib.request.urlopen(endPoint)
     return json.load(jsonObj)
 
 def JsonPartidaByMatchID(mId):
     
     Ebase_request = "https://americas.api.riotgames.com"
-    endPoint = Ebase_request+"/lol/match/v5/matches/"+mId+API_KEY_RIOT
+    endPoint = Ebase_request+"/lol/match/v5/matches/"+mId+key
     jsonObj = urllib.request.urlopen(endPoint)
     return json.load(jsonObj)
 
 def JsonLiga(tier, divisao, queue):
 
-    endPoint = base_request+'/lol/league/v4/entries/'+queue+'/'+divisao+'/'+tier+API_KEY_RIOT
+    endPoint = base_request+'/lol/league/v4/entries/'+queue+'/'+divisao+'/'+tier+key
     jsonObj = urllib.request.urlopen(endPoint)
     return json.load(jsonObj)
 
 def topMaestry(top, esID):
 
-    endPoint = base_request+'/lol/champion-mastery/v4/champion-masteries/by-summoner/'+esID+API_KEY_RIOT
+    endPoint = base_request+'/lol/champion-mastery/v4/champion-masteries/by-summoner/'+esID+key
     JsonObj = urllib.request.urlopen(endPoint)
     data = json.load(JsonObj)
 
@@ -74,7 +76,7 @@ def topMaestry(top, esID):
     
 def LevelBy_ID(esID):
 
-    final_resquest = base_request+"/lol/summoner/v4/summoners/"+esID+API_KEY_RIOT
+    final_resquest = base_request+"/lol/summoner/v4/summoners/"+esID+key
     JsonObj = urllib.request.urlopen(final_resquest)
     data = json.load(JsonObj)
     
@@ -91,7 +93,7 @@ def getVersion():
 def URL_ProfileIcon(esID):
 
     base_PI_URL = "http://ddragon.leagueoflegends.com/cdn/"+getVersion()+"/img/profileicon/"
-    endPoint = base_request+"/lol/summoner/v4/summoners/"+esID+API_KEY_RIOT
+    endPoint = base_request+"/lol/summoner/v4/summoners/"+esID+key
     
     JsonObj = urllib.request.urlopen(endPoint)
     data = json.load(JsonObj)
@@ -126,10 +128,11 @@ def ppELO(jsELO):
         print(i["wins"], '/', i['losses'])
 
 
+print(key)
 
-_sum = "kosaì"
+'''_sum = "kosaì"
 _sumID = IDbySummoner(_sum)
-pprint.pprint(JsonSummonerByID(_sumID))
+pprint.pprint(JsonSummonerByID(_sumID))'''
 #jsELO = JsonEloByID(_sumID)
 #ppELO(jsELO)
 
