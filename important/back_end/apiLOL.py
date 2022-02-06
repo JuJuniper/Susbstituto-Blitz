@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import urllib.request
 import urllib.parse
 import json
-import pprint
 
 load_dotenv()
 key = "?api_key=" + str(os.getenv("RIOT_API_KEY"))
@@ -115,29 +114,3 @@ def champNameByID(championId):
     for champ in champs:
         if (int(champs[champ]['key']) == int(championId)):
             return champs[champ]['name']
-
-def teste_1(cl):
-
-    for i in cl:
-        i[0] = champNameByID(i[0])
-
-def ppELO(jsELO):
-
-    for i in jsELO:
-        print(i['queueType'], i['tier'], i['rank'], i['leaguePoints'], 'pdl')
-        print(i["wins"], '/', i['losses'])
-
-
-print(key)
-
-'''_sum = "kosaì"
-_sumID = IDbySummoner(_sum)
-pprint.pprint(JsonSummonerByID(_sumID))'''
-#jsELO = JsonEloByID(_sumID)
-#ppELO(jsELO)
-
-
-'''_puuID = PuuIDbyEsID(_sumID)
-hist = JsonHistoricoByPuuID(_puuID)
-partida = JsonPartidaByMatchID(hist[0])
-pprint.pprint(partida['info']['participants'][0])'''
