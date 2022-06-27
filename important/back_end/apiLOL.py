@@ -1,4 +1,3 @@
-from pprint import pprint
 import os
 from dotenv import load_dotenv
 import urllib.request
@@ -7,6 +6,7 @@ import json
 
 load_dotenv()
 key = "?api_key=" + str(os.getenv("RIOT_API_KEY"))
+#key = "?api_key=RGAPI-e274cd7b-3d0d-4449-b114-faddfefb2b27"
 base_request = "https://br1.api.riotgames.com"
 
 def IDbySummoner(Summoner):
