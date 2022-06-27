@@ -1,3 +1,4 @@
+from pprint import pprint
 import back_end.apiLOL as Api
 
 def limparTerminal():
@@ -34,3 +35,22 @@ def printUser(User):
     ppUser(jsSum)
     ppELO(jsELO)
     print(maestrias)
+
+def TESTE__UltimaPartida(User):
+    
+    limparTerminal()
+
+    _id = Api.IDbySummoner(User)
+    _puuid = Api.PuuIDbyEsID(_id)
+    pprint(Api.JsonHistoricoByPuuID(_puuid))
+
+
+#TESTE__UltimaPartida("InFaMeZ")
+#_id = Api.IDbySummoner("InFaMeZ")
+#_puuid = Api.PuuIDbyEsID(_id)
+
+_json = Api.JsonPartidaByMatchID("BR1_2539465626")
+printUser("InFaMeZ")
+#pprint(_json["info"]["participants"][1])
+#with open('partida.txt', 'w') as f:
+    #f.write(str(Api.JsonPartidaByMatchID("BR1_2539465626")))
